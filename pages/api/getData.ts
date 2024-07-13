@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../lib/mongodb";
+
 const getData = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const client = await clientPromise;
@@ -14,4 +15,4 @@ const getData = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default getData;
+export default getData
