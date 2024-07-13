@@ -15,9 +15,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Data from MongoDB</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    <main>
+      <h1>学マス比較</h1>
+        <h1>Data from MongoDB</h1>
+      <div>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      </div>
+    </main>
   );
 }
