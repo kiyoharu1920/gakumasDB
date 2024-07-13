@@ -30,6 +30,7 @@ export default function Home() {
     fetchData();
   }, []);
 
+  /* helloAPI*/
   const [displayTestJSON, setDisplayTestJSON] = useState<string>("");
   const buttontestHandler = useCallback(async () => {
     const res = await fetch("/api/hello");
@@ -38,6 +39,7 @@ export default function Home() {
     console.log(displayTestJSON);
   }, [displayTestJSON]);
 
+    /* getDataAPI for mongoBD*/
   const [displayJSON, setDisplayJSON] = useState<string>("");
   const buttonclickHandler = useCallback(() => {
     const jsonData = JSON.stringify(data, null, 2);
