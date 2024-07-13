@@ -17,6 +17,7 @@ interface SupportCard {
   lessonSupport: string;
 }
 
+
 export default function Home() {
   const [data, setData] = useState<SupportCard[]>([]);
   /* 第２引数にdataを入れないこと useEffectを何度も繰り返してしまうため */
