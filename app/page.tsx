@@ -28,7 +28,6 @@ export default function Home() {
     }
 
     fetchData();
-    console.log(data);
   }, []);
 
   const [displayJSON, setDisplayJSON] = useState<string>("");
