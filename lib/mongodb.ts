@@ -1,11 +1,15 @@
 import { MongoClient } from "mongodb";
 
+console.log("start mongodb");
+
 const uri = process.env.MONGODB_URI;
 if (!uri) {
   throw new Error(
     "Please add your Mongo URI to .env.local or set it in Vercel environment variables"
   );
 }
+
+console.log(uri);
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
