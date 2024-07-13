@@ -1,9 +1,8 @@
 import { MongoClient } from 'mongodb';
 
-const uri: string | undefined = process.env.MONGODB_URI;
-
+const uri = process.env.MONGODB_URI;
 if (!uri) {
-  throw new Error('Please add your Mongo URI to .env.local');
+  throw new Error('Please add your Mongo URI to .env.local or set it in Vercel environment variables');
 }
 
 let client: MongoClient;
@@ -14,15 +13,10 @@ declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-if (process.env.NODE_ENV === 'development') {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
+if (!global._mongoClientPromise) {
   client = new MongoClient(uri);
-  clientPromise = client.connect();
+  global._mongoClientPromise = client.connect();
 }
+clientPromise = global._mongoClientPromise;
 
-export default clientPromise
+export default clientPromise;
