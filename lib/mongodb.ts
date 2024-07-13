@@ -15,8 +15,14 @@ declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000, // タイムアウトを5秒に設定
+};
+
 if (!global._mongoClientPromise) {
-  client = new MongoClient(uri);
+  client = new MongoClient(uri, options);
   global._mongoClientPromise = client.connect();
 }
 clientPromise = global._mongoClientPromise;
