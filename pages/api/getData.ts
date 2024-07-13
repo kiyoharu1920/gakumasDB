@@ -1,20 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../lib/mongodb";
 
-const getData = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("start1");
+const getData = async function (req: NextApiRequest, res: NextApiResponse) {
   try {
-    console.log("start2");
     const client = await clientPromise;
-    console.log("start3");
-    const db = client.db("gakumasDB");
-    console.log("start4");
-    const data = await db.collection("supportCards").find({}).toArray();
-    console.log("start5");
+    const db = client.db("your-database-name");
+    const data = await db.collection("your-collection-name").find({}).toArray();
     res.status(200).json(data);
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: "Unable to fetch data" });
+  } catch (error) {
+    console.error("Error connecting to the database: ", error);
+
+    // 型アサーションを使用してエラーメッセージを取得
+    if (error instanceof Error) {
+      res
+        .status(500)
+        .json({ message: "Internal Server Error", error: error.message });
+    } else {
+      res
+        .status(500)
+        .json({ message: "Internal Server Error", error: String(error) });
+    }
   }
 };
 
