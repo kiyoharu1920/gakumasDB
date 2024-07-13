@@ -17,7 +17,6 @@ interface SupportCard {
   lessonSupport: string;
 }
 
-
 export default function Home() {
   const [data, setData] = useState<SupportCard[]>([]);
   /* 第２引数にdataを入れないこと useEffectを何度も繰り返してしまうため */
@@ -31,8 +30,16 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const [displayTestJSON, setDisplayTestJSON] = useState<string>("");
+  const buttontestHandler = useCallback(async () => {
+    const res = await fetch("/api/hello");
+    const json = await res.json();
+    setDisplayTestJSON(json.message);
+    console.log(displayTestJSON);
+  }, [displayTestJSON]);
+
   const [displayJSON, setDisplayJSON] = useState<string>("");
-  const buttonHandler = useCallback(() => {
+  const buttonclickHandler = useCallback(() => {
     const jsonData = JSON.stringify(data, null, 2);
     setDisplayJSON(jsonData);
   }, [data]);
@@ -75,11 +82,17 @@ export default function Home() {
               </tfoot>
             </table>
           </div>
-
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+            onClick={buttontestHandler}
+          >
+            APIテスト
+          </button>
+          <pre>{displayTestJSON}</pre>
           <div>
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded"
-              onClick={buttonHandler}
+              onClick={buttonclickHandler}
             >
               Display Data
             </button>
