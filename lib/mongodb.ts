@@ -1,28 +1,23 @@
 import { MongoClient } from "mongodb";
 
-console.log("start mongodb");
+// 環境変数からMongoDBのURIを取得
+const uri: string = process.env.MONGODB_URI || "";
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000, // タイムアウトを5秒に設定
+};
 
-const uri = process.env.MONGODB_URI;
-if (!uri) {
-  throw new Error(
-    "Please add your Mongo URI to .env.local or set it in Vercel environment variables"
-  );
+// URIが設定されていない場合はエラーを投げる
+if (!process.env.MONGODB_URI) {
+  throw new Error("Please add your Mongo URI to .env.local");
 }
-
-console.log(uri);
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-declare global {
-  // eslint-disable-next-line no-var
-  var _mongoClientPromise: Promise<MongoClient> | undefined;
-}
-
-if (!global._mongoClientPromise) {
-  client = new MongoClient(uri);
-  global._mongoClientPromise = client.connect();
-}
-clientPromise = global._mongoClientPromise;
+// 本番環境では、新しいクライアントインスタンスを作成します
+client = new MongoClient(uri, options);
+clientPromise = client.connect();
 
 export default clientPromise;
