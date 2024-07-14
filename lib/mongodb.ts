@@ -19,6 +19,8 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000, // タイムアウトを5秒に設定
+  tls: true, // TLS/SSLを有効にする
+  tlsInsecure: true, // サーバー証明書を検証しない（開発環境向け）
 };
 
 if (!global._mongoClientPromise) {
