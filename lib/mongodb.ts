@@ -16,10 +16,15 @@ declare global {
 }
 
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000, // タイムアウトを5秒に設定
-  tls: true, // TLS/SSLを有効にする
+  // 基本設定
+  useNewUrlParser: true, // 新しいURLパーサーを使用する
+  useUnifiedTopology: true, // 統一されたトポロジーを使用する
+
+  // 接続設定
+  serverSelectionTimeoutMS: 5000, // サーバー選択のタイムアウト (ミリ秒)
+
+  // SSL/TLS設定
+  tls: true, // TLS/SSL接続を使用する
   tlsInsecure: true, // サーバー証明書を検証しない（開発環境向け）
 };
 
