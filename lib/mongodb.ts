@@ -25,7 +25,7 @@ const options = {
 
   // SSL/TLS設定
   tls: true, // TLS/SSL接続を使用する
-  tlsInsecure: true, // サーバー証明書を検証しない（開発環境向け）
+  //tlsInsecure: true, // サーバー証明書を検証しない（開発環境向け）
 };
 
 if (!global._mongoClientPromise) {
